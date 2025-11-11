@@ -10,5 +10,7 @@ package CA_2;
  * @author yagog
  */
 public enum ManagerType {
-    
+    ATHLETIC_DIRECTOR,
+    HEAD_COACH,
+    ASSISTANT_COACH;
 }

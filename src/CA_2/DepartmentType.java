@@ -9,5 +9,7 @@ package CA_2;
  * @author yagog
  */
 public enum DepartmentType {
-    
+    SPORTS,
+    ADMINISTRATION,
+    STUDENT_AFFAIRS;
 }
