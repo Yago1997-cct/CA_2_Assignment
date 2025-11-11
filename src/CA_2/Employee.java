@@ -11,9 +11,10 @@ package CA_2;
 public class Employee {
     private int id;
     private String name;
-    private DepartmentType department;
+    private Department department;
     
-    public Employee(int id, String name, DepartmentType department) {
+    
+    public Employee(int id, String name, Department department) {
         this.id = id;
         this.name = name;
         this.department = department;
@@ -27,7 +28,7 @@ public class Employee {
         return name;
     }
     
-    public DepartmentType getDepartment() {
+    public Department getDepartment() {
         return department;
     }
     
@@ -35,4 +36,6 @@ public class Employee {
     public String toString() {
         return name + " - " + department.getName();
     }
+    
 }
+

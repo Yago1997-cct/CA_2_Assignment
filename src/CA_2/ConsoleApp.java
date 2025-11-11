@@ -24,7 +24,8 @@ public class ConsoleApp {
         }
     }
     
-    Scanner option = new Scanner(System.in);
+    private Scanner option = new Scanner(System.in);
+    private StaffRepository staffRepository = new StaffRepository();
     
     public void run(){
             
@@ -81,6 +82,9 @@ public class ConsoleApp {
             
         }
         
+        
+        private static int employeeCounter = 1;
+        
         private void handleAddRecords() {
             String name;
             do{
@@ -129,6 +133,12 @@ public class ConsoleApp {
             System.out.println("You select: " + selectedPlace);
             
             
+            Department department = createDepartmentFromType(selectedPlace);
+            
+            Manager manager = new Manager(employeeCounter++, name, selectedType, department);
+            
+            staffRepository.addManager(manager);
+            
             
             System.out.println("Name: " + name);
             System.out.println("Manager Type: " + selectedType);
@@ -143,5 +153,16 @@ public class ConsoleApp {
         private void handleCreateBinaryTree (){
             
         }
+ 
+        
+        
+        
+        private static int departmentCounter = 1;
+
+        private Department createDepartmentFromType(DepartmentType type) {
+    
+        Department department = new Department(departmentCounter++, type.name(), type);
+        return department;
+}
         
 }

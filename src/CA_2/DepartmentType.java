@@ -12,4 +12,6 @@ public enum DepartmentType {
     SPORTS,
     ADMINISTRATION,
     STUDENT_AFFAIRS;
+
+    
 }
