@@ -78,7 +78,28 @@ public class ConsoleApp {
         
         
         private void handleSort() {
-            System.out.println("sort select");
+            System.out.println("Enter file path (default: CA_2.data/Applicants_Form.txt");
+            String path = option.nextLine().trim();
+            if (path.isEmpty()) {
+                path: "CA_2.data/Applicants_Form.txt"; // Path use in project in txt form
+            }
+            java.util.List<ApplicantRecord> applicants = FileService.readApplicantsFromFile(path);
+            
+            if (applicants == null || applicants.isEmpty()) {
+                System.out.println("No applicants loaded from file. Check the path or try another path.");
+                return;
+            }
+            
+            SortService.recursiveSortByName(applicants);
+            
+            int total = applicants.size();
+            int limit = Math.min(20, total);
+            
+            System.out.println("\nShowing first " + limit + " of " + total + " applicants :");
+            for (int i = 0; i < limit; i++) {
+                ApplicantRecord ar = applicants.get(i);
+                System.out.println((i + 1) + ". " + ar.getfullname() + " | " + ar.getmanagerType() + " | " + ar.getdepartmentType());
+            }
             
         }
         

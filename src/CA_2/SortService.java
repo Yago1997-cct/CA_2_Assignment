@@ -4,10 +4,16 @@
  */
 package CA_2;
 
+import java.util.List;
+
 /**
  *
  * @author yagog
  */
 public class SortService {
+
+    static void recursiveSortByName(List<ApplicantRecord> applicants) {
+        System.out.println("");
+    }
     
 }
