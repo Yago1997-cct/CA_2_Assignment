@@ -10,31 +10,31 @@ package CA_2;
  */
 public class ApplicantRecord {
     
-    private String fullname;
-    private ManagerType managerType;
-    private DepartmentType departmentType;
+    private String FullName;
+    private ManagerType ManagerType;
+    private DepartmentType DepartmentType;
     
-    public ApplicantRecord(String fullname, ManagerType managerType, DepartmentType departmentType) {
-        this.fullname = fullname;
-        this.managerType = managerType;
-        this.departmentType = departmentType;
+    public ApplicantRecord(String FullName, ManagerType ManagerType, DepartmentType DepartmentType) {
+        this.FullName = FullName;
+        this.ManagerType = ManagerType;
+        this.DepartmentType = DepartmentType;
     }
     
-    public String getfullname() {
-        return fullname;
+    public String getFullName() {
+        return FullName;
     }
     
-    public ManagerType getmanagerType() {
-        return managerType;
+    public ManagerType getManagerType() {
+        return ManagerType;
     }
     
-    public DepartmentType getdepartmentType() {
-        return departmentType;
+    public DepartmentType getDepartmentType() {
+        return DepartmentType;
     }
     
     @Override
     public String toString() {
-        return "ApplicantRecord {" + "Full Name='" + fullname + '\'' + ", Manager Type=" + managerType + ", Department Type=" + departmentType + '}';
+        return "ApplicantRecord {" + "Full Name='" + FullName + '\'' + ", Manager Type=" + ManagerType + ", Department Type=" + DepartmentType + '}';
     }
     
     

@@ -4,6 +4,7 @@
  */
 package CA_2;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -26,6 +27,7 @@ public class ConsoleApp {
     
     private Scanner option = new Scanner(System.in);
     private StaffRepository staffRepository = new StaffRepository();
+    
     
     public void run(){
             
@@ -78,10 +80,10 @@ public class ConsoleApp {
         
         
         private void handleSort() {
-            System.out.println("Enter file path (default: CA_2.data/Applicants_Form.txt");
+            System.out.println("Enter file path (default: CA_2.data/Applicants_Form.txt):");
             String path = option.nextLine().trim();
             if (path.isEmpty()) {
-                path: "CA_2.data/Applicants_Form.txt"; // Path use in project in txt form
+                path = "CA_2.data/Applicants_Form.txt"; // Path use in project in txt form
             }
             java.util.List<ApplicantRecord> applicants = FileService.readApplicantsFromFile(path);
             
@@ -98,8 +100,10 @@ public class ConsoleApp {
             System.out.println("\nShowing first " + limit + " of " + total + " applicants :");
             for (int i = 0; i < limit; i++) {
                 ApplicantRecord ar = applicants.get(i);
-                System.out.println((i + 1) + ". " + ar.getfullname() + " | " + ar.getmanagerType() + " | " + ar.getdepartmentType());
+                System.out.println((i + 1) + ". " + ar.getFullName() + " | " + ar.getManagerType() + " | " + ar.getDepartmentType());
             }
+            
+            cachedApplicants = applicants;
             
         }
         
@@ -167,8 +171,42 @@ public class ConsoleApp {
             
             
         }
+        
+        private List<ApplicantRecord> cachedApplicants = null;
+        
         private void handleSearch(){
-            System.out.println("Search select");
+            if (cachedApplicants == null || cachedApplicants.isEmpty()) {
+                System.out.println("Enter file path (default: CA_2.data/Applicants_Form.txt):");
+             String path = option.nextLine().trim();
+             if (path.isEmpty()) {
+                path = "CA_2.data/Applicants_Form.txt";
+            }
+             List<ApplicantRecord> loaded = FileService.readApplicantsFromFile(path);
+             if (loaded == null || loaded.isEmpty()) {
+                System.out.println("No applicants loaded from file. Try another path.");
+                return;
+            }
+             SortService.recursiveSortByName(loaded);
+             cachedApplicants = loaded;
+            }
+            
+            System.out.println("Put name to search:");
+            String term =option.nextLine().trim();
+            if (term.isEmpty()) {
+                System.out.println("Empty search term, returning to menu.");
+            }
+            
+            ApplicantRecord found = SearchService.searchByNameLinear(cachedApplicants, term);
+            
+            if (found == null) {
+                System.out.println("Not exist");
+            } else {
+                System.out.println("Found: " + found.getFullName());
+                System.out.println("Manager Type: " + found.getManagerType());
+                System.out.println("Department Type: " + found.getDepartmentType());
+            }
+            
+            
         }
         
         private void handleCreateBinaryTree (){
