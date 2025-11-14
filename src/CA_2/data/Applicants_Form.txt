@@ -1,0 +1,4 @@
+
+FullName;ManagerType;DepartmentType
+Alice Murphy;HEAD_COACH;SPORTS
+Bruno Costa;ASSISTANT_COACH;SPORTS
