@@ -12,5 +12,7 @@ package CA_2;
 public enum ManagerType {
     ATHLETIC_DIRECTOR,
     HEAD_COACH,
-    ASSISTANT_COACH;
+    ASSISTANT_COACH,
+    STUDENT_PLAYER,
+    DOCTOR;
 }

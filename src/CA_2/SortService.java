@@ -52,6 +52,7 @@ public class SortService {
                 app.set(k, aux.get(j++));
             }
         }
+    }
     // will compare per name(case-insensitive, null-safe).
     private static int compareByName(ApplicantRecord x, ApplicantRecord y) {
         String appx = norm(x == null ? null : x.getFullName());

@@ -5,8 +5,12 @@
 package CA_2;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,5 +40,18 @@ public class FileService {
         }
 
         return applicants;
-    } 
+    }
+    
+    public static void writeTopNToFile(List<ApplicantRecord> list, int n, String outPath) throws IOException {
+    int limit = Math.min(n, list == null ? 0 : list.size());
+    try (BufferedWriter bw = Files.newBufferedWriter(Paths.get(outPath), StandardCharsets.UTF_8)) {
+        bw.write("Name | ManagerType | DepartmentType");
+        bw.newLine();
+        for (int i = 0; i < limit; i++) {
+            ApplicantRecord ar = list.get(i);
+            bw.write(ar.getFullName() + " | " + ar.getManagerType() + " | " + ar.getDepartmentType());
+            bw.newLine();
+        }
+    }
+}
 }

@@ -9,5 +9,9 @@ package CA_2;
  * @author yagog
  */
 public enum MenuOption {
-    
+    SORT, 
+    SEARCH,
+    ADD_RECORDS,
+    CREATE_BINARY_TREE,
+    EXIT;
 }

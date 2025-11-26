@@ -39,7 +39,8 @@ public class ConsoleApp {
                 System.out.println("2.SEARCH");
                 System.out.println("3.ADD_RECORDS");
                 System.out.println("4.CREATE_BINARY_TREE ");
-                System.out.println("5. Exit");
+                System.out.println("5.EXPORT_TOP_20");
+                System.out.println("6. Exit");
                 int choice = readInt(option, "Enter your choice: ");
                 
                 
@@ -64,7 +65,12 @@ public class ConsoleApp {
                        handleCreateBinaryTree();
                     break;
                     }
+                    
                     case 5: {
+                        handleExportTop20();
+                        break;
+                    }
+                    case 6: {
                         System.out.println("Exiting program. Goodbye!");
                         running = false;
                     break;
@@ -210,8 +216,65 @@ public class ConsoleApp {
         }
         
         private void handleCreateBinaryTree (){
+            if (cachedApplicants == null || cachedApplicants.isEmpty()) {
+                System.out.println("Enter file path (default: CA_2.data/Applicants_Form.txt):");
+                String path = option.nextLine().trim();
+                if (path.isEmpty()) {
+                path = "CA_2.data/Applicants_Form.txt";
+                }
             
+                java.util.List<ApplicantRecord> loaded = FileService.readApplicantsFromFile(path);
+                if (loaded == null || loaded.isEmpty()) {
+                System.out.println("No applicants loaded from file. Try another path.");
+                return;
+                }
+                SortService.recursiveSortByName(loaded);
+                cachedApplicants = loaded;
+            }
+            
+            EmployeeBinaryTree tree = new EmployeeBinaryTree();
+            int toInsert = Math.min( Math.max(20, cachedApplicants.size()), cachedApplicants.size());
+            for (int i = 0; i <toInsert; i++) {
+                tree.insertLevelOrder(cachedApplicants.get(i));
+            }
+            
+            System.out.println("\nLevel-order tranversal:");
+            var lines = tree.levelOrderTraversal();
+            for (int i = 0; i <lines.size(); i++) {
+                System.out.println((i+1) + ". " + lines.get(i));
+            }
+            
+            System.out.println("Height: " +tree.maximun());
+            System.out.println("Node Count: " + tree.nodeCount());
         }
+        
+        private void handleExportTop20() {
+    if (cachedApplicants == null || cachedApplicants.isEmpty()) {
+        System.out.println("Enter input file path (default: CA_2.data/Applicants_Form.txt):");
+        String inPath = option.nextLine().trim();
+        if (inPath.isEmpty()) inPath = "CA_2.data/Applicants_Form.txt";
+
+        java.util.List<ApplicantRecord> loaded = FileService.readApplicantsFromFile(inPath);
+        if (loaded == null || loaded.isEmpty()) {
+            System.out.println("No data to export. Check the input file.");
+            return;
+        }
+        SortService.recursiveSortByName(loaded);
+        cachedApplicants = loaded;
+    }
+
+    System.out.println("Enter output path (default: CA_2.data/top20.txt):");
+    String outPath = option.nextLine().trim();
+    if (outPath.isEmpty()) outPath = "CA_2.data/top20.txt";
+
+    try {
+        FileService.writeTopNToFile(cachedApplicants, 20, outPath);
+        int total = Math.min(20, cachedApplicants.size());
+        System.out.println("Exported " + total + " of 20 to: " + outPath);
+    } catch (Exception ex) {
+        System.out.println("I/O error during export: " + ex.getMessage());
+    }
+}
  
         
         

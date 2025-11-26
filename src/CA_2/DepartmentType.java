@@ -11,7 +11,6 @@ package CA_2;
 public enum DepartmentType {
     SPORTS,
     ADMINISTRATION,
-    STUDENT_AFFAIRS;
-
-    
+    STUDENT_STAFF,
+    MEDICAL_STAFF;
 }
