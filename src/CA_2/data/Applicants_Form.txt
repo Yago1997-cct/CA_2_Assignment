@@ -1,5 +1,4 @@
 
-FullName;ManagerType;DepartmentType
 Denis Silva;ATHLETIC_DIRECTOR;ADMINISTRATION
 Alice Murphy;HEAD_COACH;SPORTS
 Bruno Costa;ASSISTANT_COACH;SPORTS

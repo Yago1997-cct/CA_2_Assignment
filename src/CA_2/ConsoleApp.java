@@ -85,7 +85,7 @@ public class ConsoleApp {
         }
         
         
-        private void handleSort() {
+        private void handleSort() { //Handles the menu option to sort and display applicants alphabetically.
             System.out.println("Enter file path (default: CA_2.data/Applicants_Form.txt):");
             String path = option.nextLine().trim();
             if (path.isEmpty()) {
@@ -110,12 +110,13 @@ public class ConsoleApp {
             }
             
             cachedApplicants = applicants;
-            
+            //The sorted list is then stored in cachedApplicants for later reuse.
         }
         
         
         private static int employeeCounter = 1;
         
+        //Handles the menu option to add a new staff record.
         private void handleAddRecords() {
             String name;
             do{
@@ -180,12 +181,12 @@ public class ConsoleApp {
         
         private List<ApplicantRecord> cachedApplicants = null;
         
-        private void handleSearch(){
+        private void handleSearch(){  //Handles the menu option to search for a staff member by name.
             if (cachedApplicants == null || cachedApplicants.isEmpty()) {
                 System.out.println("Enter file path (default: CA_2.data/Applicants_Form.txt):");
              String path = option.nextLine().trim();
              if (path.isEmpty()) {
-                path = "CA_2.data/Applicants_Form.txt";
+                path = "CA_2.data/Applicants_Form.txt"; // File that will be the list of 20 register and this part get from this list. 
             }
              List<ApplicantRecord> loaded = FileService.readApplicantsFromFile(path);
              if (loaded == null || loaded.isEmpty()) {
@@ -215,7 +216,7 @@ public class ConsoleApp {
             
         }
         
-        private void handleCreateBinaryTree (){
+        private void handleCreateBinaryTree (){ //Handles the menu option to build and inspect a binary tree of applicants.
             if (cachedApplicants == null || cachedApplicants.isEmpty()) {
                 System.out.println("Enter file path (default: CA_2.data/Applicants_Form.txt):");
                 String path = option.nextLine().trim();
@@ -246,22 +247,22 @@ public class ConsoleApp {
             
             System.out.println("Height: " +tree.maximun());
             System.out.println("Node Count: " + tree.nodeCount());
-        }
+        } //After building the tree, it prints the level-order traversal lines along with the computed height and total node count, giving an overview of the tree structure.
         
-        private void handleExportTop20() {
+        private void handleExportTop20() { //Handles the menu option to export the top 20 applicants to a text file.
     if (cachedApplicants == null || cachedApplicants.isEmpty()) {
         System.out.println("Enter input file path (default: CA_2.data/Applicants_Form.txt):");
         String inPath = option.nextLine().trim();
         if (inPath.isEmpty()) inPath = "CA_2.data/Applicants_Form.txt";
 
         java.util.List<ApplicantRecord> loaded = FileService.readApplicantsFromFile(inPath);
-        if (loaded == null || loaded.isEmpty()) {
+        if (loaded == null || loaded.isEmpty()) { //If cachedApplicants is empty, it loads and sorts the data from an input file path provided by the user (or a default path).
             System.out.println("No data to export. Check the input file.");
             return;
         }
         SortService.recursiveSortByName(loaded);
         cachedApplicants = loaded;
-    }
+    } //On success, the method reports how many records were exported and the destination path; on failure, it prints an I/O error message.
 
     System.out.println("Enter output path (default: CA_2.data/top20.txt):");
     String outPath = option.nextLine().trim();
